@@ -1,0 +1,109 @@
+// RESET
+body,h1,h2,h3,p{
+    color: #5a5a5a;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+ul,li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// GLOBAL STYLE 
+body{
+  padding-bottom: 80px;
+}
+h1,h2{
+  width: 100%; max-width: 1000px;
+  color: #5a5a5a;
+  font-weight: normal;
+  margin: 40px auto 0;
+}
+div{
+  width: 100%; max-width: 1000px;
+  margin: 24px auto 0;
+}
+canvas{
+  background-color: #efefef;
+  margin-top: 8px;
+}
+p{
+  color: #5a5a5a;
+  font-size: 16px;
+  line-height: 2;
+}
+p + p{
+  margin-top: 16px;
+}
+
+header{
+  width: 100%; max-width: 1000px;
+  margin: 0 auto;
+
+  p{
+    margin-top: 24px;
+  }
+
+  ul{
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    margin-top: 16px;
+    padding: 24px;
+
+    li{
+      padding-left: 13px;
+      position: relative;
+      &:before{
+        width: 3px;
+        height: 3px;
+        background-color: #ccc;
+        border-radius: 50%;
+        content: "";
+        position: absolute;
+        top: 50%; left: 0;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+// js-carr test
+.js-carr{
+  width: 100%; max-width: 1000px;
+  position: relative;
+  overflow: hidden;
+
+  &-wrap{
+    width: 500%; 
+    background-color: #eee;
+    display: flex;
+  }
+
+  &-contents{
+    width: 20%;
+    height: 480px;
+    background: url(http://placeimg.com/1000/480/any) left top no-repeat;
+  }
+
+  &-btn  {
+    width: 100%;
+
+    .icon{
+      width: 20px;
+      color: white;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &-left{
+        left: 24px;
+      }
+      &-right{
+        right: 24px;
+      }
+    }
+  }
+} 
