@@ -1,3 +1,14 @@
+// mediaquery
+$widthTab: 768px; //タブレット
+$widthSp: 568px; //スマートフォン
+
+@mixin sp {
+  //$widthTab-1（767px）以下の場合
+  @media (max-width: ($widthTab - 1)) {
+    @content;
+  }
+}
+
 // RESET
 body,h1,h2,h3,p{
     color: #5a5a5a;
@@ -32,15 +43,15 @@ canvas{
 p{
   color: #5a5a5a;
   font-size: 16px;
-  line-height: 2;
-}
-p + p{
-  margin-top: 16px;
 }
 
 header{
   width: 100%; max-width: 1000px;
   margin: 0 auto;
+  @include sp {
+    width: 90%;
+    margin: 0 auto;
+  };
 
   p{
     margin-top: 24px;
@@ -62,13 +73,37 @@ header{
         border-radius: 50%;
         content: "";
         position: absolute;
-        top: 50%; left: 0;
-        transform: translateY(-50%);
+        top: 12px; left: 0;
       }
     }
   }
 }
 
+//js-test
+.js-test{
+  width: 100%; max-width: 1000px;
+  background-color: #eee;
+  box-sizing: border-box;
+  margin: 24px auto 0;
+  overflow: hidden;
+  padding: 24px;
+  @include sp {width: 90%;};
+
+  &-hitarea{
+    width: 100%;
+    min-height: 150px;
+    background-color: #ccc;
+  }
+  &-results{
+    width: 50%;
+    float: left;
+    margin-top: 16px;
+
+    & > p{
+      margin-top: 16px;
+    }
+  }
+}
 // js-carr test
 .js-carr{
   width: 100%; max-width: 1000px;
@@ -85,6 +120,7 @@ header{
     width: 20%;
     height: 480px;
     background: url(http://placeimg.com/1000/480/any) left top no-repeat;
+    background-size: cover;
   }
 
   &-btn  {

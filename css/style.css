@@ -30,16 +30,16 @@ canvas {
 
 p {
   color: #5a5a5a;
-  font-size: 16px;
-  line-height: 2; }
-
-p + p {
-  margin-top: 16px; }
+  font-size: 16px; }
 
 header {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto; }
+  @media (max-width: 767px) {
+    header {
+      width: 90%;
+      margin: 0 auto; } }
   header p {
     margin-top: 24px; }
   header ul {
@@ -57,10 +57,30 @@ header {
         border-radius: 50%;
         content: "";
         position: absolute;
-        top: 50%;
-        left: 0;
-        -webkit-transform: translateY(-50%);
-                transform: translateY(-50%); }
+        top: 12px;
+        left: 0; }
+
+.js-test {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #eee;
+  box-sizing: border-box;
+  margin: 24px auto 0;
+  overflow: hidden;
+  padding: 24px; }
+  @media (max-width: 767px) {
+    .js-test {
+      width: 90%; } }
+  .js-test-hitarea {
+    width: 100%;
+    min-height: 150px;
+    background-color: #ccc; }
+  .js-test-results {
+    width: 50%;
+    float: left;
+    margin-top: 16px; }
+    .js-test-results > p {
+      margin-top: 16px; }
 
 .js-carr {
   width: 100%;
@@ -77,7 +97,8 @@ header {
   .js-carr-contents {
     width: 20%;
     height: 480px;
-    background: url(http://placeimg.com/1000/480/any) left top no-repeat; }
+    background: url(http://placeimg.com/1000/480/any) left top no-repeat;
+    background-size: cover; }
   .js-carr-btn {
     width: 100%; }
     .js-carr-btn .icon {
