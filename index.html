@@ -38,11 +38,11 @@
 
 <div class="js-carr">
   <ul class="js-carr-wrap">
-    <li class="js-carr-contents"></li>
-    <li class="js-carr-contents"></li>
-    <li class="js-carr-contents"></li>
-    <li class="js-carr-contents"></li>
-    <li class="js-carr-contents"></li>
+    <li class="js-carr-contents">01</li>
+    <li class="js-carr-contents">02</li>
+    <li class="js-carr-contents">03</li>
+    <li class="js-carr-contents">04</li>
+    <li class="js-carr-contents">05</li>
   </ul>
 
   <div class="js-carr-btn">
@@ -51,5 +51,12 @@
     <webicon icon="fa:chevron-right"/></p>
   </div>
 </div>
+
+<script>
+var colors = ['skyblue','pink','slategray','orange','lightgray'];
+$('.js-carr-contents').each(function(i) {
+  $('.js-carr-contents').eq(i).css('background-color',colors[i]);
+});
+</script>
 </body>
 </html>
