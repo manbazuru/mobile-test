@@ -118,27 +118,32 @@ header{
 
   &-contents{
     width: 20%;
-    height: 480px;
-    background: url(http://placeimg.com/1000/480/any) left top no-repeat;
+    height: 300px;
     background-size: cover;
+    box-sizing: border-box;
+    color: white;
+    font-size: 24px;
+    padding: 24px 0 0 24px;
   }
 
   &-btn  {
     width: 100%;
 
     .icon{
-      width: 20px;
+      width: 30px;
+      box-sizing: border-box;
       color: white;
       cursor: pointer;
+      padding: 5px;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
 
       &-left{
-        left: 24px;
+        left: 14px;
       }
       &-right{
-        right: 24px;
+        right: 14px;
       }
     }
   }
