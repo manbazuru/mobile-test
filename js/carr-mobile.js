@@ -50,6 +50,7 @@ var $carrContents = $('.js-carr-contents');
 var posArr = [];
 var posX,posY,moveX,moveY;
 var move = 0;
+var count3d = 100 / $carrContents.length; // translate3dの場合、全体の幅が基準になるので合わす
 var paddingLeft = $carrContents.css('padding-left').split('px');
 var paddingRight = $carrContents.css('padding-right').split('px');
 var judge = ($carrContents.width() + parseInt(paddingLeft[0],10) + parseInt(paddingRight[0],10)) / 3;
@@ -90,17 +91,24 @@ var Func = {
     moveX = posArr[0] - posX;
     moveY = posArr[1] - posY;
 
+    // スクロールの可能性を考慮
     if(moveX > 20 || moveX < -20 || moveY > 18 || moveY < -18) {
       e.preventDefault();
     }
 
-    var calcPercent = Func.calcPercent(moveX,'.js-carr-contents');
-    $carrWrap.css({'margin-left': move + -calcPercent + '%'});
+    var calcPercent = Func.calcPercent(moveX,'.js-carr-wrap');
+    $carrWrap.css({'transform' : 'translate3d(' + (move - calcPercent) + '%,0,0)'});
   },
 
   carrEnd : function() {
+    // touchmoveを経由したかを判定。してなければ動かさない
+    if(posArr[0] < posX + 20 && posArr[0] > posX - 20) {
+      moveX = 0;
+    }
+
+    // 変数judge以上動かしたかを判定。動いていなければ元の位置に戻す
     if(moveX < judge && moveX > -judge) {
-      $carrWrap.animate({'margin-left': move + '%'},300,'linear');
+      $carrWrap.css({'transform': 'translate3d(' + move + '%,0,0)'});
     }else{
       if(moveX > judge) {
         Func.goRight();
@@ -111,28 +119,28 @@ var Func = {
   },
 
   goLeft : function() {
-    move += 100;
+    move += count3d;
     if(move > 0) {
-      move = ($carrContents.length - 1) * -100;
+      move = ($carrContents.length - 1) * -count3d;
     }
 
-    $carrWrap.stop().animate({'margin-left': move + '%'},300,'linear');
+    $carrWrap.stop().css({'transform' : 'translate3d(' + move + '%,0,0)'});
   },
 
   goRight : function() {
-    move -= 100;
-    if(move < ($carrContents.length - 1) * -100) {
+    move -= count3d;
+    if(move < ($carrContents.length - 1) * -count3d){
       move = 0;
     }
 
-    $carrWrap.stop().animate({'margin-left': move + '%'},300,'linear');
+    $carrWrap.stop().css({'transform': 'translate3d(' + move + '%,0,0)'});
   },
 
   calcPercent : function(value,elm) {
     var pl = $(elm).css('padding-left').split('px');
     var pr = $(elm).css('padding-right').split('px');
     var total = ($(elm).width() + parseInt(pl[0],10) + parseInt(pr[0],10));
-    value = value / (total / 100);
+    value = value / (total / count3d);
     return value;
   }
 };
