@@ -44,19 +44,26 @@ function touchEnd() {
 
 
 // js-carr
-var $carrWrap = $('.js-carr-wrap');
-var $carrContents = $('.js-carr-contents');
+var $carr = $('.js-carr');
+var $carrWrap = $carr.children('.js-carr-wrap');
+var $carrContents = $carrWrap.children('.js-carr-contents');
+// ページャー生成用のクラスがあるかを判定
+var isPager = $carr.children('div').hasClass('js-carr-pager');
+var $carrPager,_on;
 
 var posArr = [];
-var posX,posY,moveX,moveY;
-var move = 0;
-var count3d = 100 / $carrContents.length; // translate3dの場合、全体の幅が基準になるので合わす
+var posX,posY,moveX,moveY,move,count3d,calcPercent;
 var paddingLeft = $carrContents.css('padding-left').split('px');
 var paddingRight = $carrContents.css('padding-right').split('px');
+// フリック時の判定用。全体の幅＋左右パディング / 判定値。3だと1/3になる
 var judge = ($carrContents.width() + parseInt(paddingLeft[0],10) + parseInt(paddingRight[0],10)) / 3;
 
 
 var init = function() {
+  move = 0;
+  count3d = 100 / $carrContents.length; // translate3dの場合、全体の幅が基準になるので合わす
+
+  // タッチイベントに対応してたら開始
   if(isTouch) {
     $carrContents.on({
       'touchstart' : function(e) {Func.carrStart(e)},
@@ -65,6 +72,12 @@ var init = function() {
     });
   }
 
+  // ページャー生成用のクラスがあればページャー生成
+  if(isPager) {
+    Func.createPager();
+  }
+
+  // クリックイベント
   $('.icon-left').on('click',function(){
     Func.goLeft();
   });
@@ -96,7 +109,7 @@ var Func = {
       e.preventDefault();
     }
 
-    var calcPercent = Func.calcPercent(moveX,'.js-carr-wrap');
+    calcPercent = Func.calcPercent(moveX,'.js-carr-wrap');
     $carrWrap.css({'transform' : 'translate3d(' + (move - calcPercent) + '%,0,0)'});
   },
 
@@ -125,6 +138,11 @@ var Func = {
     }
 
     $carrWrap.stop().css({'transform' : 'translate3d(' + move + '%,0,0)'});
+
+    // ページャーがあったらページャーも動作
+    if(isPager) {
+      Func.pagerMove();
+    }
   },
 
   goRight : function() {
@@ -134,6 +152,11 @@ var Func = {
     }
 
     $carrWrap.stop().css({'transform': 'translate3d(' + move + '%,0,0)'});
+
+    // ページャーがあったらページャーも動作
+    if(isPager) {
+      Func.pagerMove();
+    }
   },
 
   calcPercent : function(value,elm) {
@@ -142,6 +165,25 @@ var Func = {
     var total = ($(elm).width() + parseInt(pl[0],10) + parseInt(pr[0],10));
     value = value / (total / count3d);
     return value;
+  },
+
+  createPager : function() {
+    $carrPager = $carr.children('.js-carr-pager');
+
+    $carrPager.append('<ul class="js-carr-pager-wrap">');
+    for(var i = 0; i< $carrContents.length; i++) {
+      $('.js-carr-pager-wrap').append('<li class="js-carr-pager-item">');
+    }
+    // 初期値として1番目のページャーをオンにする
+    $('.js-carr-pager-item').first().addClass('_on');
+  },
+
+  pagerMove : function() {
+    // translate3dの場合は一度幅を戻す。animateだったらmove / 100のみでOK
+    _on = -(move * $carrContents.length / 100);
+    $carrPager.find('li')
+      .removeClass('_on')
+      .eq(_on).addClass('_on');
   }
 };
 

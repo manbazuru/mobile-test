@@ -89,6 +89,7 @@ header {
   overflow: hidden; }
   .js-carr-wrap {
     width: 500%;
+    height: 300px;
     background-color: #eee;
     display: -webkit-box;
     display: -webkit-flex;
@@ -100,11 +101,11 @@ header {
             transition: 0.3s cubic-bezier(0.02, 0.01, 0.47, 1); }
   .js-carr-contents {
     width: 20%;
-    height: 300px;
     background-color: #eee;
     padding: 24px 0 0 24px; }
   .js-carr-btn {
-    width: 100%; }
+    width: 100%;
+    margin: 0; }
     .js-carr-btn .icon {
       width: 20px;
       color: white;
@@ -117,3 +118,33 @@ header {
         left: 24px; }
       .js-carr-btn .icon-right {
         right: 24px; }
+  .js-carr-pager {
+    width: 100%;
+    margin: 0;
+    padding: 0; }
+    .js-carr-pager-wrap {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+              transform: translateX(-50%); }
+    .js-carr-pager-item {
+      width: 6px;
+      height: 6px;
+      background-color: #fff;
+      border-radius: 50%;
+      margin-left: 16px;
+      opacity: .8; }
+      .js-carr-pager-item:first-child {
+        margin-left: 0; }
+    .js-carr-pager ._on {
+      background-color: #5a5a5a;
+      opacity: 1;
+      -webkit-transform: scale(1.6);
+              transform: scale(1.6);
+      -webkit-transition: .5s;
+              transition: .5s; }
